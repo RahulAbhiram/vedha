@@ -1,5 +1,8 @@
 
 import co from '../assets/cosw.png'
+import MissionCarousel from '../components/carousel'
+import FadingCarousel from '../components/carousel'
+import CarouselComponent from '../components/carousel'
 const Home=()=>{
     return (
         <>
@@ -23,25 +26,19 @@ const Home=()=>{
         
     </section> 
     <section id="whoweare">
-        <div>
-            <div className='cards-wwa'>
-                <div>
-                MISSION
-                </div>
-                <div>
-                Working towards the improvement of campus's coding culture by organizing regular coding classes and contests.
-                </div>
-            </div>
-        </div>
-        <div className='wwa-title'>
-            <h2 className='wwa'>
+    <h2 className='wwa'>
                 Who We Are?
             </h2>
-        </div>
+        
+            <MissionCarousel/>
+
+        
 
     </section>
+    
     <section id="sponsors">
         <h2 className="sponsors-title" >Sponsors</h2>
+        
         <div className="d-flex partner-holders">
 
             <div >
