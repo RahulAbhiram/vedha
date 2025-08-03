@@ -42,12 +42,6 @@ const Home=()=>{
         <div className="d-flex partner-holders">
 
             <div >
-                <img className="rahul" src="https://recursionnitd.vercel.app/static/media/algo_zenith.76b5293b2194a07abe75.png"/>
-                <div>
-
-                </div>
-            </div>
-            <div >
                 <img className="rahul"src="https://recursionnitd.vercel.app/static/media/cloudsploit.053a3fe9d5aaed0be17b.png"/>
                 <div>
 
