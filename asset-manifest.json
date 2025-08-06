@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/vedha/static/css/main.9f90e8a6.css",
-    "main.js": "/vedha/static/js/main.8f5c02da.js",
+    "main.css": "/vedha/static/css/main.5217766a.css",
+    "main.js": "/vedha/static/js/main.7c302953.js",
     "static/media/cosw.png": "/vedha/static/media/cosw.7941e2e081b60e32b5f9.png",
     "static/media/slick.svg": "/vedha/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/vedha/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/vedha/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/vedha/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/vedha/index.html",
-    "main.9f90e8a6.css.map": "/vedha/static/css/main.9f90e8a6.css.map",
-    "main.8f5c02da.js.map": "/vedha/static/js/main.8f5c02da.js.map"
+    "main.5217766a.css.map": "/vedha/static/css/main.5217766a.css.map",
+    "main.7c302953.js.map": "/vedha/static/js/main.7c302953.js.map"
   },
   "entrypoints": [
-    "static/css/main.9f90e8a6.css",
-    "static/js/main.8f5c02da.js"
+    "static/css/main.5217766a.css",
+    "static/js/main.7c302953.js"
   ]
 }
