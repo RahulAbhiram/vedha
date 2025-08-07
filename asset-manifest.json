@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/vedha/static/css/main.c9610831.css",
-    "main.js": "/vedha/static/js/main.499faca5.js",
+    "main.js": "/vedha/static/js/main.71c25407.js",
     "static/media/cosw.png": "/vedha/static/media/cosw.7941e2e081b60e32b5f9.png",
     "static/media/slick.svg": "/vedha/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/vedha/static/media/slick.a4e97f5a2a64f0ab1323.eot",
@@ -9,10 +9,10 @@
     "static/media/slick.woff": "/vedha/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/vedha/index.html",
     "main.c9610831.css.map": "/vedha/static/css/main.c9610831.css.map",
-    "main.499faca5.js.map": "/vedha/static/js/main.499faca5.js.map"
+    "main.71c25407.js.map": "/vedha/static/js/main.71c25407.js.map"
   },
   "entrypoints": [
     "static/css/main.c9610831.css",
-    "static/js/main.499faca5.js"
+    "static/js/main.71c25407.js"
   ]
 }
