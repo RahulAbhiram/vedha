@@ -40,7 +40,7 @@ code {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 9999;
   background: rgba(26, 32, 44, 0.95);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -94,6 +94,19 @@ code {
   color: #12D481;
   background: rgba(18, 212, 129, 0.2);
 }
+
+/* Profile Dropdown and UI Elements */
+.dropdown-menu, .profile-dropdown, .user-menu {
+  z-index: 10000 !important;
+  position: relative;
+}
+
+/* Ensure any dropdown content appears above navbar */
+.dropdown-content, .profile-menu, .user-dropdown-content {
+  z-index: 10001 !important;
+  position: absolute;
+}
+
 /* Modern Home Page */
 .first-Section {
   display: flex;
