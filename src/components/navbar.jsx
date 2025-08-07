@@ -6,12 +6,28 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        setIsAuthenticated(!!token);
+        const checkAuthStatus = () => {
+            const token = localStorage.getItem('authToken');
+            setIsAuthenticated(!!token);
+        };
+
+        // Check on component mount
+        checkAuthStatus();
+
+        // Listen for storage changes (when login happens)
+        window.addEventListener('storage', checkAuthStatus);
+        
+        // Also check periodically (for same-tab changes)
+        const interval = setInterval(checkAuthStatus, 1000);
+
+        return () => {
+            window.removeEventListener('storage', checkAuthStatus);
+            clearInterval(interval);
+        };
     }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('authToken');
         setIsAuthenticated(false);
         navigate('/');
     };
@@ -21,7 +37,7 @@ const Navbar = () => {
             <div><img className="logo" src="https://recursionnitd.in/static/image/logoInverted.png" alt=""/></div>
             <div className="d-flex navlinks ">
                 <Link className="links" to="/interview">Interview</Link>
-                <Link className="links" to="/exp">Experience</Link>
+                <Link className="links" to="/tasks">Tasks</Link>
                 <Link className="links" to="/ev">Events</Link>
                 <Link className="links" to="/gs">Getting Started</Link>
                 <Link className="links" to="/team">Team</Link>

@@ -65,17 +65,15 @@ function Login() {
       console.log('Response data:', data);
       
       if (response.ok) {
-        setMessage(isLogin ? "Login successful!" : "Registration successful!");
         if (data.token) {
-          localStorage.setItem('token', data.token);
+          localStorage.setItem('authToken', data.token);
           localStorage.setItem('user', JSON.stringify(data.user));
-          // Redirect to dashboard
+          setMessage(isLogin ? "Login successful! Redirecting..." : "Registration successful! Redirecting...");
+          
+          // Immediate redirect to dashboard
           setTimeout(() => {
             navigate('/dashboard');
-          }, 1000);
-          setTimeout(() => {
-            navigate('/dashboard');
-          }, 1000);
+          }, 500);
         }
       } else {
         const errorMessage = data.error || data.message || "An error occurred";

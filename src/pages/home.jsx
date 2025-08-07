@@ -3,11 +3,34 @@ import co from '../assets/cosw.png'
 import MissionCarousel from '../components/carousel'
 import FadingCarousel from '../components/carousel'
 import CarouselComponent from '../components/carousel'
+import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
 const Home=()=>{
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        setIsAuthenticated(!!token);
+    }, []);
+
     return (
         <>
         
-    <section className="first-Section">
+    {/* Authentication Banner for logged-in users */}
+    {isAuthenticated && (
+        <div className="auth-banner" role="alert">
+            <div className="banner-content">
+                <span className="banner-emoji">🎉</span>
+                <span className="font-medium">Welcome back! </span>
+                <Link to="/dashboard" className="banner-link">
+                    Go to your Dashboard to add Interview Experiences and Tasks
+                </Link>
+            </div>
+        </div>
+    )}
+        
+    <section className={`first-Section ${isAuthenticated ? 'with-auth-banner' : ''}`}>
         <div className="Titlediv">
     <h1 className="title">{"{RECursion}"}</h1>
         </div>

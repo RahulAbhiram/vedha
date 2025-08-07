@@ -382,127 +382,90 @@ function Dashboard() {
           </div>
         )}
 
-        {/* Complete Task Form */}
+        {/* Quick Task Form */}
         {showTaskForm && (
-          <div className="interview-form-container">
-            <div className="form-card">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="form-title">Add Task/Project Experience</h2>
-                <button
-                  onClick={() => setShowTaskForm(false)}
-                  className="text-gray-500 hover:text-gray-700 text-xl"
+          <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Add Task/Project Experience</h2>
+              <button
+                onClick={() => setShowTaskForm(false)}
+                className="text-gray-500 hover:text-gray-700 text-xl"
+              >
+                ✕
+              </button>
+            </div>
+            <form onSubmit={handleTaskSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="Company/Organization Name *"
+                  value={taskForm.company_name}
+                  onChange={(e) => setTaskForm({...taskForm, company_name: e.target.value})}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Position/Role *"
+                  value={taskForm.position}
+                  onChange={(e) => setTaskForm({...taskForm, position: e.target.value})}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <select
+                  value={taskForm.task_type}
+                  onChange={(e) => setTaskForm({...taskForm, task_type: e.target.value})}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  ✕
+                  <option value="project">Project</option>
+                  <option value="internship">Internship</option>
+                  <option value="freelance">Freelance</option>
+                  <option value="full_time">Full Time</option>
+                  <option value="part_time">Part Time</option>
+                </select>
+                <input
+                  type="date"
+                  placeholder="Start Date"
+                  value={taskForm.start_date}
+                  onChange={(e) => setTaskForm({...taskForm, start_date: e.target.value})}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required
+                />
+              </div>
+              <textarea
+                placeholder="Description of work/project *"
+                value={taskForm.description}
+                onChange={(e) => setTaskForm({...taskForm, description: e.target.value})}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                rows="4"
+                required
+              />
+              <textarea
+                placeholder="Technologies/Tools Used (comma separated)"
+                value={taskForm.technologies_used}
+                onChange={(e) => setTaskForm({...taskForm, technologies_used: e.target.value})}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                rows="2"
+              />
+              <div className="flex space-x-4">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50"
+                >
+                  {loading ? 'Saving...' : 'Save Task Experience'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowTaskForm(false)}
+                  className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400"
+                >
+                  Cancel
                 </button>
               </div>
-              
-              <form onSubmit={handleTaskSubmit} className="interview-form">
-                <div className="form-row">
-                  <div className="form-group">
-                    <label className="form-label">Company/Organization Name</label>
-                    <input
-                      type="text"
-                      value={taskForm.company_name}
-                      onChange={(e) => setTaskForm({...taskForm, company_name: e.target.value})}
-                      className="form-input"
-                      placeholder="Enter company name"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label className="form-label">Position/Role</label>
-                    <input
-                      type="text"
-                      value={taskForm.position}
-                      onChange={(e) => setTaskForm({...taskForm, position: e.target.value})}
-                      className="form-input"
-                      placeholder="Enter position"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label className="form-label">Task Type</label>
-                    <select
-                      value={taskForm.task_type}
-                      onChange={(e) => setTaskForm({...taskForm, task_type: e.target.value})}
-                      className="form-input"
-                    >
-                      <option value="project">Project</option>
-                      <option value="internship">Internship</option>
-                      <option value="freelance">Freelance</option>
-                      <option value="full_time">Full Time</option>
-                      <option value="part_time">Part Time</option>
-                    </select>
-                  </div>
-                  
-                  <div className="form-group">
-                    <label className="form-label">Start Date</label>
-                    <input
-                      type="date"
-                      value={taskForm.start_date}
-                      onChange={(e) => setTaskForm({...taskForm, start_date: e.target.value})}
-                      className="form-input"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label className="form-label">Description of Work/Project</label>
-                    <textarea
-                      value={taskForm.description}
-                      onChange={(e) => setTaskForm({...taskForm, description: e.target.value})}
-                      className="form-textarea"
-                      placeholder="Describe the work or project you did"
-                      rows="4"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label className="form-label">Technologies/Tools Used</label>
-                    <textarea
-                      value={taskForm.technologies_used}
-                      onChange={(e) => setTaskForm({...taskForm, technologies_used: e.target.value})}
-                      className="form-textarea"
-                      placeholder="List technologies/tools used (comma separated)"
-                      rows="4"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-actions">
-                  <button 
-                    type="submit" 
-                    className="btn-submit" 
-                    disabled={loading}
-                  >
-                    {loading ? 'Adding...' : 'Save Task Experience'}
-                  </button>
-                  <button 
-                    type="button" 
-                    className="btn-secondary"
-                    onClick={() => {
-                      setTaskForm({
-                        company_name: '',
-                        position: '',
-                        task_type: 'project',
-                        start_date: '',
-                        description: '',
-                        technologies_used: ''
-                      });
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
+            </form>
           </div>
         )}
       </div>

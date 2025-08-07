@@ -2,8 +2,8 @@
 // This allows switching between local development and production backend
 
 const API_CONFIG = {
-  // Use environment variable if available, otherwise default to local
-  BASE_URL: process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000',
+  // Use production Railway backend
+  BASE_URL: 'https://web-production-aaeaf.up.railway.app',
   
   // API endpoints
   ENDPOINTS: {
@@ -19,6 +19,9 @@ const API_CONFIG = {
 export const getApiUrl = (endpoint) => {
   return `${API_CONFIG.BASE_URL}${endpoint}`;
 };
+
+// Export the base URL for direct use
+export const API_BASE_URL = API_CONFIG.BASE_URL;
 
 // Export individual endpoint URLs
 export const API_URLS = {
