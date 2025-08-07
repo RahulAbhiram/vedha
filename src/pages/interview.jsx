@@ -28,6 +28,7 @@ const Interview = () => {
       });
       if (response.ok) {
         const data = await response.json();
+        console.log('My interviews data:', data);
         setInterviews(data);
       }
     } catch (error) {
@@ -40,6 +41,7 @@ const Interview = () => {
       const response = await fetch(`${API_BASE_URL}/api/auth/public/interviews/`);
       if (response.ok) {
         const data = await response.json();
+        console.log('Public interviews data:', data);
         setPublicInterviews(data);
       }
     } catch (error) {
@@ -79,59 +81,53 @@ const Interview = () => {
         {/* Content */}
         <div className="content-section">
           {activeTab === 'my-interviews' && isAuthenticated && (
-            <div className="experiences-grid">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', padding: '24px 0' }}>
               {interviews.length > 0 ? (
                 interviews.map(interview => (
-                  <div key={interview.id} className="experience-card">
-                    <div className="card-header">
-                      <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1a202c' }}>
-                        {interview.company_name || 'Company'}
+                  <div key={interview.id} style={{
+                    backgroundColor: 'white',
+                    borderRadius: '12px',
+                    padding: '24px',
+                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                    border: '1px solid #e2e8f0',
+                    minHeight: '280px'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                      <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#1a202c', margin: '0' }}>
+                        {interview.company_name || 'No Company'}
                       </h3>
-                      <span className={`status-badge ${interview.status || ''}`} style={{ 
-                        backgroundColor: interview.status === 'selected' ? '#48bb78' : interview.status === 'pending' ? '#ed8936' : '#e53e3e',
+                      <span style={{
+                        backgroundColor: interview.status === 'selected' ? '#48bb78' : 
+                                       interview.status === 'pending' ? '#ed8936' : '#f56565',
                         color: 'white',
                         padding: '4px 12px',
                         borderRadius: '20px',
-                        fontSize: '0.875rem',
-                        fontWeight: '600'
+                        fontSize: '0.75rem',
+                        fontWeight: '600',
+                        textTransform: 'uppercase'
                       }}>
-                        {interview.status ? interview.status.toUpperCase() : 'N/A'}
+                        {interview.status ? interview.status : 'N/A'}
                       </span>
                     </div>
                     
-                    <div className="card-body" style={{ marginTop: '20px' }}>
-                      <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                        <strong style={{ color: '#1a202c' }}>Position:</strong> {interview.position || 'N/A'}
+                    <div style={{ color: '#4a5568', lineHeight: '1.6' }}>
+                      <p style={{ margin: '0 0 8px 0' }}>
+                        <strong style={{ color: '#2d3748' }}>Position:</strong> {interview.position || 'N/A'}
                       </p>
-                      <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                        <strong style={{ color: '#1a202c' }}>Date:</strong> {interview.interview_date ? new Date(interview.interview_date).toLocaleDateString() : 'N/A'}
+                      <p style={{ margin: '0 0 8px 0' }}>
+                        <strong style={{ color: '#2d3748' }}>Date:</strong> {interview.interview_date ? new Date(interview.interview_date).toLocaleDateString() : 'N/A'}
                       </p>
                       {interview.difficulty && (
-                        <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                          <strong style={{ color: '#1a202c' }}>Difficulty:</strong> {interview.difficulty.charAt(0).toUpperCase() + interview.difficulty.slice(1)}
+                        <p style={{ margin: '0 0 8px 0' }}>
+                          <strong style={{ color: '#2d3748' }}>Difficulty:</strong> {interview.difficulty.charAt(0).toUpperCase() + interview.difficulty.slice(1)}
                         </p>
                       )}
-                      <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                        <strong style={{ color: '#1a202c' }}>Experience:</strong> {interview.description || 'No description'}
+                      <p style={{ margin: '0 0 16px 0' }}>
+                        <strong style={{ color: '#2d3748' }}>Experience:</strong> {interview.description || 'No description'}
                       </p>
-                      {interview.technical_questions && (
-                        <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                          <strong style={{ color: '#1a202c' }}>Technical Questions:</strong> {interview.technical_questions}
-                        </p>
-                      )}
-                      {interview.hr_questions && (
-                        <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                          <strong style={{ color: '#1a202c' }}>HR Questions:</strong> {interview.hr_questions}
-                        </p>
-                      )}
-                      {interview.tips && (
-                        <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                          <strong style={{ color: '#1a202c' }}>Tips:</strong> {interview.tips}
-                        </p>
-                      )}
                     </div>
                     
-                    <div className="card-footer" style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #e2e8f0' }}>
+                    <div style={{ paddingTop: '16px', borderTop: '1px solid #e2e8f0' }}>
                       <small style={{ color: '#718096' }}>
                         Added on {interview.created_at ? new Date(interview.created_at).toLocaleDateString() : 'Unknown'}
                       </small>
@@ -139,7 +135,14 @@ const Interview = () => {
                   </div>
                 ))
               ) : (
-                <div className="empty-state" style={{ textAlign: 'center', padding: '60px 40px' }}>
+                <div style={{ 
+                  gridColumn: '1 / -1', 
+                  textAlign: 'center', 
+                  padding: '60px 40px',
+                  backgroundColor: 'white',
+                  borderRadius: '12px',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                }}>
                   <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2d3748', marginBottom: '16px' }}>
                     No interview experiences yet
                   </h3>
@@ -152,59 +155,53 @@ const Interview = () => {
           )}
 
           {activeTab === 'all-interviews' && (
-            <div className="experiences-grid">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', padding: '24px 0' }}>
               {publicInterviews.length > 0 ? (
                 publicInterviews.map(interview => (
-                  <div key={interview.id} className="experience-card">
-                    <div className="card-header">
-                      <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1a202c' }}>
-                        {interview.company_name || 'Company'}
+                  <div key={interview.id} style={{
+                    backgroundColor: 'white',
+                    borderRadius: '12px',
+                    padding: '24px',
+                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                    border: '1px solid #e2e8f0',
+                    minHeight: '280px'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                      <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#1a202c', margin: '0' }}>
+                        {interview.company_name || 'No Company'}
                       </h3>
-                      <span className={`status-badge ${interview.status || ''}`} style={{ 
-                        backgroundColor: interview.status === 'selected' ? '#48bb78' : interview.status === 'pending' ? '#ed8936' : '#e53e3e',
+                      <span style={{
+                        backgroundColor: interview.status === 'selected' ? '#48bb78' : 
+                                       interview.status === 'pending' ? '#ed8936' : '#f56565',
                         color: 'white',
                         padding: '4px 12px',
                         borderRadius: '20px',
-                        fontSize: '0.875rem',
-                        fontWeight: '600'
+                        fontSize: '0.75rem',
+                        fontWeight: '600',
+                        textTransform: 'uppercase'
                       }}>
-                        {interview.status ? interview.status.toUpperCase() : 'N/A'}
+                        {interview.status ? interview.status : 'N/A'}
                       </span>
                     </div>
                     
-                    <div className="card-body" style={{ marginTop: '20px' }}>
-                      <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                        <strong style={{ color: '#1a202c' }}>Position:</strong> {interview.position || 'N/A'}
+                    <div style={{ color: '#4a5568', lineHeight: '1.6' }}>
+                      <p style={{ margin: '0 0 8px 0' }}>
+                        <strong style={{ color: '#2d3748' }}>Position:</strong> {interview.position || 'N/A'}
                       </p>
-                      <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                        <strong style={{ color: '#1a202c' }}>Date:</strong> {interview.interview_date ? new Date(interview.interview_date).toLocaleDateString() : 'N/A'}
+                      <p style={{ margin: '0 0 8px 0' }}>
+                        <strong style={{ color: '#2d3748' }}>Date:</strong> {interview.interview_date ? new Date(interview.interview_date).toLocaleDateString() : 'N/A'}
                       </p>
                       {interview.difficulty && (
-                        <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                          <strong style={{ color: '#1a202c' }}>Difficulty:</strong> {interview.difficulty.charAt(0).toUpperCase() + interview.difficulty.slice(1)}
+                        <p style={{ margin: '0 0 8px 0' }}>
+                          <strong style={{ color: '#2d3748' }}>Difficulty:</strong> {interview.difficulty.charAt(0).toUpperCase() + interview.difficulty.slice(1)}
                         </p>
                       )}
-                      <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                        <strong style={{ color: '#1a202c' }}>Experience:</strong> {interview.description || 'No description'}
+                      <p style={{ margin: '0 0 16px 0' }}>
+                        <strong style={{ color: '#2d3748' }}>Experience:</strong> {interview.description || 'No description'}
                       </p>
-                      {interview.technical_questions && (
-                        <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                          <strong style={{ color: '#1a202c' }}>Technical Questions:</strong> {interview.technical_questions}
-                        </p>
-                      )}
-                      {interview.hr_questions && (
-                        <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                          <strong style={{ color: '#1a202c' }}>HR Questions:</strong> {interview.hr_questions}
-                        </p>
-                      )}
-                      {interview.tips && (
-                        <p style={{ marginBottom: '12px', color: '#2d3748' }}>
-                          <strong style={{ color: '#1a202c' }}>Tips:</strong> {interview.tips}
-                        </p>
-                      )}
                     </div>
                     
-                    <div className="card-footer" style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #e2e8f0' }}>
+                    <div style={{ paddingTop: '16px', borderTop: '1px solid #e2e8f0' }}>
                       <small style={{ color: '#718096' }}>
                         Shared by {interview.user || 'Anonymous'} on {interview.created_at ? new Date(interview.created_at).toLocaleDateString() : 'Unknown'}
                       </small>
@@ -212,7 +209,14 @@ const Interview = () => {
                   </div>
                 ))
               ) : (
-                <div className="empty-state" style={{ textAlign: 'center', padding: '60px 40px' }}>
+                <div style={{ 
+                  gridColumn: '1 / -1', 
+                  textAlign: 'center', 
+                  padding: '60px 40px',
+                  backgroundColor: 'white',
+                  borderRadius: '12px',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                }}>
                   <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2d3748', marginBottom: '16px' }}>
                     No interview experiences available
                   </h3>
